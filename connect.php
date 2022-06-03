@@ -1,16 +1,15 @@
-    <?php
-    include_once "dbh.inc.php";
+<?php
+if(!empty($_POST["submit"])) {
+	$navn = $_POST["navn"];
+	$email = $_POST["email"];
+	$besked = $_POST["besked"];
 
-        $navn = $_POST['navn'];
-        $email = $_POST['email'];
-        $besked = $_POST['besked'];
-
-
-        // First we make a SQL query that selects all data from our users table in the database.
-        $sql = "INSERT INTO mc_contact (navn, email, besked) VALUES ('$navn', '$email', '$besked');";
-        
-
-        // Then we run the query in the database.
-        mysqli_query($conn, $sql);
-    
-    ?> 
+	$conn = mysql_connect("localhost","root","");
+	mysql_select_db("MC-contact_form",$conn);
+	mysql_query("INSERT INTO mc_contact (navn, email, besked) VALUES ('" . $navn. "', '" . $email. "','" . $besked. "')");
+	$insert_id = mysql_insert_id();
+	if(!empty($insert_id)) {
+	$message = "Successfully Added.";
+	}
+}
+?>
