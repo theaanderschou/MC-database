@@ -1,4 +1,8 @@
 <?php
+
+$conn = mysql_connect("localhost","root","");
+mysql_select_db("contact_form",$conn);
+
 if(!empty($_POST["submit"])) {
 	$navn = $_POST["navn"];
 	$email = $_POST["email"];
